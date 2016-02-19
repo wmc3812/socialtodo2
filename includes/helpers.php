@@ -9,7 +9,7 @@
      * Helper functions.
      */
 
-    require_once("config.php");
+    //require_once("config.php");
 
     /**
      * Apologizes to user with message.
@@ -93,46 +93,6 @@
         {
             trigger_error("Invalid view: {$view}", E_USER_ERROR);
         }
-    }
-    
-    // functional FB like function that stopped working because of network problems(?)
-    function getfbdata($url)
-    {   
-        $fql  = "SELECT share_count, like_count, comment_count FROM link_stat WHERE url = '$url'";
-
-        $fqlURL = "https://api.facebook.com/method/fql.query?format=json&query=" . urlencode($fql);
-        
-        $response = file_get_contents($fqlURL);
-        
-        return json_decode($response);
-        
-        return true;
-    }
-    
-    
-    // former Crunchbase function used before I was blocked from Crunchbase access
-    function crunchdata($org)
-    {
-        $API_key = "b7c39ed660638cefe0f9b8fca64eae97";
-        
-        //$url = "http://api.crunchbase.com/v/3/organization/?name=".$org."&user_key=".$API_key;
-        
-        $url = "https://api.crunchbase.com/v/3/odm/odm.json.tar.gz?user_key=[$API_key]";
-        
-        /*
-        $ch = curl_init($url); // add your url which contains json file
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $content = curl_exec($ch);
-        curl_close($ch);
-        $json = json_decode($content);
-        */
-    
-        /*
-        $url = "https://api.crunchbase.com/v/3/organization/".$org."?user_key=".$APIkey."";
-        $contents = file_get_contents($url);
-        $data = json_decode($contents, true);
-        return $data;
-        */
     }
 
 ?>

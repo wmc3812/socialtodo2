@@ -23,27 +23,21 @@
             apologize("You must provide your password.");
         }
 
-        // query database for user
-        $rows = CS50::query("SELECT * FROM users WHERE username = ?", $_POST["username"]);
+        $sql = "SELECT * FROM logininfo WHERE username = '$_POST[username]' AND pass = '$_POST[password]'";
+        $result = mysqli_query($con, $sql);
+        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-        // if we found user, check password
-        if (count($rows) == 1)
-        {
-            // first (and only) row
-            $row = $rows[0];
-
-            // compare hash of user's input against hash that's in database
-            if (password_verify($_POST["password"], $row["hash"]))
-            {
-                // remember that user's now logged in by storing user's ID in session
-                $_SESSION["id"] = $row["id"];
-
-                // redirect to portfolio
-                redirect("/");
-            }
+        if(!empty($row['username']) AND !empty($row['pass'])) 
+        { 
+            $_SESSION['username'] = $row['pass']; 
+            redirect("tasks.php");
         }
-
-        // else apologize
-        apologize("Invalid username and/or password.");
+        
+        else 
+        {
+            // else apologize
+            echo 'Unnsuccessful login';
+            apologize("Invalid username and/or password.");
+        }
     }
 ?>

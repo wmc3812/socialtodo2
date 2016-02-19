@@ -3,9 +3,6 @@
     /**
      * config.php
      *
-     * Computer Science 50
-     * Final Project
-     *
      * Configures app.
      */
 
@@ -16,13 +13,16 @@
     // requirements
     require("helpers.php");
 
-    // CS50 Library
-    //require("../vendor/library50-php-5/CS50/CS50.php");
-    //CS50::init(__DIR__ . "/../config.json");
+    //Connect to the database
+    $host = "127.0.0.1";
+    $user = "wmc3812";                     
+    $pass = "";                                  
+    $db = "users";                                  
+    $port = 3306;                                
+    
+    $con = mysqli_connect($host, $user, $pass, $db, $port)or die(mysql_error());
 
-    // enable sessions
-    session_start();
-
+    /*
     // require authentication for all pages except /login.php, /logout.php, /register.php, and /home.php
     if (!in_array($_SERVER["PHP_SELF"], ["/login.php", "/logout.php", "/register.php", "/home.php", "/about.php", "/howto.php"]))
     {
@@ -31,5 +31,5 @@
             redirect("home.php");
         }
     }
-
+    */
 ?>

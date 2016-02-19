@@ -17,7 +17,7 @@
         if (empty($_POST["username"]))
         {
             apologize("You must enter a username!");
-        }
+        } 
         
         else if (empty($_POST["password"]))
         {
@@ -29,16 +29,12 @@
             apologize("The password and confirmation don't match!");
         }
         
-        else if (CS50::query("SELECT * FROM users WHERE username = ?", $_POST["username"]))
-        {
-            apologize("This username is taken.");
-        }
-        
-        // add entered login info to SQL table with starting cash amount
-        $user = CS50::query("INSERT IGNORE INTO users (username, hash) VALUES(?, ?)", $_POST["username"], password_hash($_POST["password"], PASSWORD_DEFAULT));
-            
+        // add entered login info to SQL table 
+        $insert = "INSERT INTO logininfo (username, pass) VALUES('$_POST[username]', '$_POST[password]')";
+        $result = mysqli_query($con, $insert);
+         
         // store the entered info and log the user in    
-        $rows = CS50::query("SELECT LAST_INSERT_ID() AS id");
+        $rows = "SELECT LAST_INSERT_ID() AS id";
         $id = $rows[0]["id"];
         $_SESSION["id"] = $id;
         redirect("/index.php");
