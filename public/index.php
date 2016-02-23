@@ -5,7 +5,9 @@
 
 
     // render portfolio
-    // render("portfolio.php", ["trackers" => $trackers, "title" => "portfolio"]);
+    render("taskview.php"); 
     
-    redirect("home.php");
+    // ["trackers" => $trackers, "title" => "portfolio"]);
+    
+    // redirect("home.php");
 ?>

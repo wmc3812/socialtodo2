@@ -18,7 +18,7 @@
         if (empty($_POST["startup"]))
         {
             apologize("Please enter a startup to track.");
-        }
+        } 
         
         $startup = $_POST["startup"];
         
